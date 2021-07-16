@@ -1,4 +1,6 @@
 import { getRepository } from "typeorm";
+import { hash } from "bcryptjs";
+
 import Users from "../models/users";
 // services ficam as regras de negocio
 interface RequesteProps {
@@ -6,6 +8,7 @@ interface RequesteProps {
   email: string;
   password: string;
 }
+
 class CreateUserService {
   public async execute({
     name,
@@ -17,14 +20,15 @@ class CreateUserService {
     const CheckUserExist = await userRepository.findOne({
       where: { email },
     });
-    console.log(CheckUserExist);
     if (CheckUserExist) {
       throw new Error("Email address already used");
     } //Cria uma estancia e não é necessario o await
+
+    const hastPassword = await hash(password, 8);
     const user = userRepository.create({
       name,
       email,
-      password,
+      password: hastPassword,
     });
 
     await userRepository.save(user);
