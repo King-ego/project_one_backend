@@ -1,0 +1,30 @@
+import {
+  MigrationInterface,
+  QueryRunner,
+  TableColumn,
+  TableForeignKey,
+} from "typeorm";
+
+export default class createAlterProviderFieldToProviderID1626402289982
+  implements MigrationInterface
+{
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createForeignKey(
+      "apointments",
+      new TableForeignKey({
+        name: "AppointmentProvider",
+        columnNames: ["provider_id"], //recebe a chave estrageira
+        referencedColumnNames: ["id"], //quem recebe a relação na outra tabela
+        referencedTableName: "users", //tabela relacionada
+        onDelete: "SET NULL", //o que acontece quando o usuario é deletado (RESTRICT usuario não pode ser deletado, SET NULL seta o provider_id como nullo, CASCADE deletou o usuario delete todas as relações )
+        onUpdate: "CASCADE", //Se o id mudar(CASCADE)
+      })
+    );
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    //precisa ser executada de maneira rerversa
+    await queryRunner.dropForeignKey("apointments", "AppointmentProvider");
+
+  }
+}
