@@ -1,3 +1,6 @@
 node_modules
 .vscode
 .error
+buuild/
+tmp/*
+!tmp/.gitkeep

@@ -5,7 +5,7 @@
   "scripts": {
     "dev:nodemon": "nodemon dist/server.js",
     "build": "tsc",
-    "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "dev:serve": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "license": "MIT",
@@ -16,6 +16,7 @@
     "date-fns": "^2.22.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
     "nodemon": "^2.0.12",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^8.5.4",
+    "@types/multer": "^1.4.7",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
   }

@@ -20,6 +20,9 @@ class Users {
   @Column()
   password: string;
 
+  @Column()
+  avatar: string;
+
   @CreateDateColumn()
   createaat: Date;
 

@@ -10,6 +10,7 @@ interface UserProps {
   password?: string;
   createaat: Date;
   updatedat: Date;
+  avatar:string
 }
 interface authProps {
   user: UserProps;
