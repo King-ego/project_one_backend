@@ -2,6 +2,8 @@ import { getRepository } from "typeorm";
 import { hash } from "bcryptjs";
 
 import Users from "../models/users";
+import AppError from "../errors/AppError";
+
 // services ficam as regras de negocio
 interface RequesteProps {
   name: string;
@@ -21,7 +23,7 @@ class CreateUserService {
       where: { email },
     });
     if (CheckUserExist) {
-      throw new Error("Email address already used");
+      throw new AppError("Email address already used");
     } //Cria uma estancia e não é necessario o await
 
     const hastPassword = await hash(password, 8);

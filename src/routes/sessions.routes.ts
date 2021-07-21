@@ -10,7 +10,7 @@ interface UserProps {
   password?: string;
   createaat: Date;
   updatedat: Date;
-  avatar:string
+  avatar: string;
 }
 interface authProps {
   user: UserProps;
@@ -18,20 +18,16 @@ interface authProps {
 }
 
 sessionsRouter.post("/", async (request, response) => {
-  try {
-    const { email, password } = request.body;
+  const { email, password } = request.body;
 
-    const AuthenticateUser = new AuthenticateUserService();
+  const AuthenticateUser = new AuthenticateUserService();
 
-    const { user, token }: authProps = await AuthenticateUser.execute({
-      email,
-      password,
-    });
-    delete user.password;
-    return response.json({ user, token });
-  } catch (err) {
-    return response.status(400).json({ errors: err.message });
-  }
+  const { user, token }: authProps = await AuthenticateUser.execute({
+    email,
+    password,
+  });
+  delete user.password;
+  return response.json({ user, token });
 });
 
 export default sessionsRouter;
